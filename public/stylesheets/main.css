@@ -1,0 +1,43 @@
+/* Pokemon Type Hex colors courtesy of Negative10 from the 
+	 epidemicjohto (http://www.epidemicjohto.com/t882-type-colors-hex-colors) 
+	 forums
+*/
+
+.bug {background: #A6B91A}
+.dark {background: #705746}
+.dragon {background: #6F35FC}
+.electric {background: #F7D02C}
+.fairy {background: #D685AD}
+.fighting {background: #C22E28}
+.fire {background: #EE8130}
+.flying {background: #A98FF3}
+.ghost {background: #735797}
+.grass {background: #7AC74C}
+.ground {background: #E2BF65}
+.ice {background: #96D9D6}
+.normal {background: #A8A77A}
+.poison {background: #A33EA1}
+.psychic {background: #F95587}
+.rock {background: #B6A136}
+.steel {background: #B7B7CE}
+.water {background: #6390F0}
+
+.dark, .dragon, .poison {
+	color: #fff;
+}
+
+.bug, .electric {
+	color: #000;
+}
+
+.ui.grid > .row {
+	padding: 0;
+}
+
+#pokemon-list.ui.grid {
+	padding: 1.5rem 0;
+}
+
+a.button.floated {
+	margin-bottom: 1.5rem;
+}

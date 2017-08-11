@@ -1,0 +1,4 @@
+.env
+node_modules
+public/scripts/howler.min.js
+public/semantic

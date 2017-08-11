@@ -1,0 +1,109 @@
+<% include ../partials/header %>
+<% var id = pokemon.species.url.match(/\d/gi); id.shift(); id = id.join("") %>
+
+<% if (pokemon.name.includes("-mega")) {%>
+	<% var megaName = pokemon.name.slice(pokemon.name.indexOf("-"), pokemon.name.length) %>
+<% } %>
+
+<div class="ui basic center aligned segment">
+
+	<h1>
+		<%= pokemon.name.slice(0,1).toUpperCase() + pokemon.name.slice(1); %>
+	</h1>
+	<div class="ui fluid centered small image" >
+		<img src="<%= pokemon.sprites.front_default %>">
+			
+		<div>
+			<button class="ui right labeled icon button" id="cry-button" 
+				data-cry="<%= id %><%= pokemon.name.includes("-mega") ? megaName : null%>">
+				<i class="play icon"></i>
+				Cry
+			</button>
+		</div>
+	</div>
+	
+	<%- CommonJS.displayButton("show", "right", pokemon.id) %>
+	<%- CommonJS.displayButton("show", "left", pokemon.id) %>
+	
+	<h2>Info</h2>
+
+	<div class="ui raised segment">
+		<h3>Type</h3>
+		<div class="ui grid">
+			<% CommonJS.sort(pokemon.types, "slot") %>
+			<% pokemon.types.forEach(function(type) { %>
+				<% if (pokemon.types.length > 1) {%>
+					<div class="eight wide column <%= type.type.name %>">
+						<%= CommonJS.formatText(type.type.name) %>
+					</div>
+				<% } else { %>
+					<div class="sixteen wide column <%= type.type.name %>">
+						<%= CommonJS.formatText(type.type.name) %>
+					</div>
+				<% } %>
+			<% }) %>
+		</div>
+	</div>
+
+	<div class="ui raised segment">
+		<% var hasHidden = false %>
+		<% CommonJS.sort(pokemon.abilities, "slot") %>
+
+		<% pokemon.abilities.forEach(function(ability) {%>
+			<% if (ability.is_hidden) { %>
+				<% hasHidden = true; %>
+			<% } %>
+		<% }) %>
+
+		<% if (hasHidden) {%>
+			<span class="ui top right attached label">A black background denotes a hidden ability</span>
+		<% } %>
+		<h3>Abilities</h3>
+		
+		<div class="ui grid">
+			<% pokemon.abilities.forEach(function(ability) {%>
+				<% if (pokemon.abilities.length === 3) { %>
+					<% if (!ability.is_hidden) {%>
+						<div class="eight wide column">
+							<%= CommonJS.formatText(ability.ability.name) %>
+						</div>
+					<% } else { %>
+						<div class="sixteen wide black column">
+							<%= CommonJS.formatText(ability.ability.name) %>
+						</div>
+					<% } %>
+				<% } else if (pokemon.abilities.length === 2) { %>
+					<% if (!ability.is_hidden) {%>
+						<div class="sixteen wide column">
+							<%= CommonJS.formatText(ability.ability.name) %>
+						</div>
+					<% } else { %>
+						<div class="sixteen wide black column">
+							<%= CommonJS.formatText(ability.ability.name) %>
+						</div>
+					<% } %>
+				<% } else { %>
+					<div class="sixteen wide column">
+						<%= CommonJS.formatText(ability.ability.name) %>
+					</div>		
+				<% } %>
+			<% }) %>
+		</div>
+	</div>
+
+	<div class="ui raised segment">
+		
+		<h3>Moves</h3>
+		<div class="ui segments grid">
+			<% for (var i = 0, len = pokemon.moves.length; i < len; i++) {%>
+				<div class="sixteen wide column segment">
+					<%= CommonJS.formatText(pokemon.moves[i].move.name) %>
+				</div>
+			<% } %>
+		</div>
+
+	</div>
+
+</div>
+
+<% include ../partials/footer %>

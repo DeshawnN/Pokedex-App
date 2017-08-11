@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<div class="ui basic center aligned segment">
+	<h1>Pokemon List</h1>
+
+	<div id="pokemon-list" class="ui padded grid">
+		<% pokemon.forEach(function(pokemon) {%>
+			<div class="row" style="">
+				<div class="column">
+					<div class="ui segment">			
+						<a href="/pokemon/<%= pokemon.name %>"><%= CommonJS.formatText(pokemon.name) %></a>
+					</div>
+				</div>
+			</div>
+		<% }) %>
+	</div>
+	<% if (typeof offset != "undefined" && offset > 1) {%>
+		<a id="previous-button" class="ui left floated red button" href="/pokemon?offset=<%= offset - 26%>">Prev</a>
+	<% } %>
+	<% if (typeof offset != "undefined" && offset < 808) { %>
+		<a id="next-button" class="ui right floated blue button" href="/pokemon?offset=<%= offset + 26%>">Next</a>
+	<% } %>
+</div>
+
+<% include ../partials/footer %>

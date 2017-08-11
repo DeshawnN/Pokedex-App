@@ -1,0 +1,17 @@
+<% include partials/header %>
+
+<div class="ui basic center aligned segment">
+	<h1>PokeDex App</h1>
+	<p>For those that wanna "Catch em All!"</p>
+	
+	<div class="ui search">
+		<form action="/pokemon" method="post">
+			<div class="ui input">
+				<input class="prompt" type="text" placeholder="Pokemon Name" name="pokemon">
+			</div>
+			<input class="ui blue button" type="submit" value="Search"> 
+		</form>
+	</div>
+</div>
+
+<% include partials/footer %>
