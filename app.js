@@ -1,8 +1,7 @@
 var express 	 = require("express"),
 		app 			 = express(),
 		bodyParser = require("body-parser"),
-		CommonJS 	 = require("./common"),
-		howler 		 = require("howler");
+		CommonJS 	 = require("./common");
 
 require("dotenv").config();
 
