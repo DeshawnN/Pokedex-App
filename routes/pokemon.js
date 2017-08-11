@@ -3,6 +3,13 @@ var router = express.Router();
 var Pokedex = require("pokedex-promise-v2");
 var P = new Pokedex();
 
+var allPokemon = [];
+P.getPokemonsList({}, function(response) {
+	for (var i = 0, len = response.results.length; i < len; i++) {
+		allPokemon.push(response.results[i]);
+	}
+});
+
 var interval = {
 	offset: 1,
 	limit: 25
@@ -20,17 +27,15 @@ router.get("/", function(req, res) {
 });
 
 router.post("/", function(req, res) {
-	var foundPokemon = [];
+	var foundPokemon = []
 	var query = req.body.pokemon.toLowerCase();
 
-	P.getPokemonsList({}, function(response) {
-		for (var i = 0, len = response.results.length; i < len; i++) {
-			if (response.results[i].name.includes(query)) {
-				foundPokemon.push(response.results[i]);
-			}
+	for (var i = 0, len = allPokemon.length; i < len; i++) {
+		if (allPokemon[i].name.includes(query)) {
+			foundPokemon.push(allPokemon[i]);
 		}
+	}
 	res.render("pokemon", {pokemon: foundPokemon})
-	});
 });
 
 router.get("/:pokemon", function(req, res) {
